@@ -1,7 +1,8 @@
 # Homebrew tap for Sonya/JAES
 
-Private laboratory tap for the Sonya circuit-optimization application. Access to
-both this repository and `joaocolombari/Sonya` is required.
+Private laboratory tap for the Sonya circuit-optimization application. The tap
+contains an immutable, reduced source archive for each published release so the
+Homebrew build sandbox never needs a second private GitHub authentication.
 
 Authenticate Git with GitHub, then install on macOS or Linux:
 

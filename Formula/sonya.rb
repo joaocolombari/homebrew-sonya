@@ -4,7 +4,8 @@
 class Sonya < Formula
   desc "Local multiobjective valve-amplifier optimization and validation"
   homepage "https://github.com/joaocolombari/Sonya"
-  url "https://github.com/joaocolombari/Sonya.git", tag: "v0.1.0", using: :git
+  url "file://#{File.expand_path("../vendor/sonya-0.1.0.tar.gz", __dir__)}"
+  sha256 "1f6855448e6c3d3c1354c971a3849b10559607c3a6db89c4df6079fc7f264394"
   version "0.1.0"
 
   depends_on "uv" => :build
