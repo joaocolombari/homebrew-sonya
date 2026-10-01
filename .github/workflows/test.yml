@@ -24,6 +24,7 @@ jobs:
         run: |
           if [[ "${RUNNER_OS}" == "Linux" ]]; then
             echo "/home/linuxbrew/.linuxbrew/bin" >> "${GITHUB_PATH}"
+            export PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
           fi
           brew --version
 
