@@ -1,0 +1,42 @@
+name: Test formula
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  install-and-diagnose:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-15, ubuntu-24.04]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Locate Homebrew
+        run: |
+          if [[ "${RUNNER_OS}" == "Linux" ]]; then
+            echo "/home/linuxbrew/.linuxbrew/bin" >> "${GITHUB_PATH}"
+          fi
+          brew --version
+
+      - name: Install from this tap
+        run: |
+          brew tap joaocolombari/sonya "${GITHUB_WORKSPACE}"
+          brew install joaocolombari/sonya/sonya
+
+      - name: Verify package and formula
+        run: |
+          sonya install doctor --strict package
+          brew test joaocolombari/sonya/sonya
+
+      - name: Verify Linux electrical core
+        if: runner.os == 'Linux'
+        run: sonya install doctor --strict core
